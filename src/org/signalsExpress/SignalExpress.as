@@ -1,27 +1,32 @@
+// Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
 package org.signalsExpress {
 import flash.utils.Dictionary;
 import flash.utils.getQualifiedClassName;
 import org.signalsExpress.vo.SignalHandlerVO;
 
 /**
- * COMMENT
- * @author rBanevicius
+ * Alternative to flash events. Re-imagination of as3-Signals (Robert Penner)
+ * @author Raimundas Banevicius (http://www.mindscriptact.com/)
  */
 public class SignalExpress {
 	
+	// optional collection of classes, that dispatcher, must provide.
 	private var innerParamClasses:Array;
 	
-	// doit : is weak reference dictionary needed here???
+	// all handlerVO's stored by function.
 	private var handlerRegistry:Dictionary = new Dictionary();
 	
-	// first handrel in linked list
+	// first handler in linked list
 	private var head:SignalHandlerVO;
 	
 	// last handler in linked list
 	private var tail:SignalHandlerVO;
 	
+	/**
+	 * CONSTRUCTOR
+	 * @param	... paramClasses	optional classes that must be dispatched and handled by listening function.
+	 */
 	public function SignalExpress(... paramClasses) {
-		
 		CONFIG::debug {
 			if (paramClasses) {
 				var paramCount:int = paramClasses.length;
@@ -35,8 +40,10 @@ public class SignalExpress {
 		innerParamClasses = paramClasses;
 	}
 	
+	/**
+	 * Alternative way to constructor parameters to set paramClasses that must be dispatched and handled by listening function.
+	 */
 	public function set paramClasses(value:Array):void {
-		
 		CONFIG::debug {
 			if (value) {
 				var paramCount:int = value.length;
@@ -50,6 +57,104 @@ public class SignalExpress {
 		innerParamClasses = value;
 	}
 	
+	//----------------------------------
+	//     adding
+	//----------------------------------
+	
+	/**
+	 * Add handler function, that will be executed every time signal is dispatched.
+	 * @param	handler	function to be executed with every signal dispatch.
+	 * @param	once	if set to true - handler will be automatically removed after first use.
+	 */
+	public function add(handler:Function, once:Boolean = false):void {
+		
+		// check if handler is already added
+		if (handlerRegistry[handler]) {
+			throw Error("This handler is already added.");
+		}
+		
+		// create handler object
+		var handlerVo:SignalHandlerVO = new SignalHandlerVO();
+		handlerVo.handler = handler;
+		handlerVo.once = once;
+		
+		handlerRegistry[handler] = handlerVo;
+		
+		// add to linked list.
+		
+		if (head) {
+			tail.next = handlerVo;
+			handlerVo.prev = tail;
+			tail = handlerVo;
+		} else {
+			head = handlerVo;
+			tail = handlerVo;
+		}
+	
+	}
+	
+	//----------------------------------
+	//     removing
+	//----------------------------------
+	
+	/**
+	 * Remove signal handling function.
+	 * @param	handler	remove function to be not executed with  signal dispatch.
+	 */
+	public function remove(handler:Function):void {
+		var handlerVo:SignalHandlerVO = handlerRegistry[handler];
+		if (handlerVo) {
+			
+			// remove from list.
+			if (handlerVo.prev) {
+				handlerVo.prev.next = handlerVo.next;
+			} else {
+				// the first
+				head = handlerVo.next;
+			}
+			if (handlerVo.next) {
+				handlerVo.next.prev = handlerVo.prev;
+			} else {
+				// the last
+				tail = handlerVo.prev;
+			}
+			
+			// remove from registry.
+			delete handlerRegistry[handler];
+		}
+	}
+	
+	/**
+	 * Remove all signal handling functions.
+	 */
+	public function removeAll():void {
+		
+		var handlerVo:SignalHandlerVO = head;
+		
+		while (handlerVo) {
+			var nextHandler:SignalHandlerVO = handlerVo.next;
+			
+			delete handlerRegistry[handlerVo.handler];
+			
+			handlerVo.handler = null;
+			handlerVo.next = null;
+			handlerVo.prev = null;
+			
+			handlerVo = nextHandler;
+		}
+		
+		head = null;
+		tail = null;
+	}
+	
+	//----------------------------------
+	//     dispatching
+	//----------------------------------
+	
+	/**
+	 * Dispatch signal, all handling functions will be executed with given parameters.
+	 * @param	... params	Parameter objects to be sent to handling function.
+	 */
 	public function dispatch(... params):void {
 		
 		var paramCount:int = params.length;
@@ -115,80 +220,22 @@ public class SignalExpress {
 		}
 	}
 	
-	public function add(handler:Function, once:Boolean = false):void {
-		
-		// check if handler is already added
-		if (handlerRegistry[handler]) {
-			throw Error("This handler is already added.");
-		}
-		
-		// create handler object
-		var handlerVo:SignalHandlerVO = new SignalHandlerVO();
-		handlerVo.handler = handler;
-		handlerVo.once = once;
-		
-		handlerRegistry[handler] = handlerVo;
-		
-		// add to linked list.
-		
-		if (head) {
-			tail.next = handlerVo;
-			handlerVo.prev = tail;
-			tail = handlerVo;
-		} else {
-			head = handlerVo;
-			tail = handlerVo;
-		}
+	//----------------------------------
+	//     bubbling
+	//----------------------------------
 	
-	}
-	
-	public function remove(handler:Function):void {
-		var handlerVo:SignalHandlerVO = handlerRegistry[handler];
-		if (handlerVo) {
-			
-			// remove from list.
-			if (handlerVo.prev) {
-				handlerVo.prev.next = handlerVo.next;
-			} else {
-				// the first
-				head = handlerVo.next;
-			}
-			if (handlerVo.next) {
-				handlerVo.next.prev = handlerVo.prev;
-			} else {
-				// the last
-				tail = handlerVo.prev;
-			}
-			
-			// remove from rogistry.
-			delete handlerRegistry[handler];
-		}
-	}
-	
-	public function removeAll():void {
-		
-		var handlerVo:SignalHandlerVO = head;
-		
-		while (handlerVo) {
-			var nextHandler:SignalHandlerVO = handlerVo.next;
-			
-			delete handlerRegistry[handlerVo.handler];
-			
-			handlerVo.handler = null;
-			handlerVo.next = null;
-			handlerVo.prev = null;
-			
-			handlerVo = nextHandler;
-		}
-		
-		head = null;
-		tail = null;
-	}
-	
+	/**
+	 * Make other signal dispatches dispatch current signal.
+	 * @param	bubblingSignal	another signal for this signal to react to.
+	 */
 	public function addBubblingFrom(bubblingSignal:SignalExpress):void {
 		bubblingSignal.add(this.dispatch);
 	}
 	
+	/**
+	 * Stop current signal from dispatching then another signal dispatches.
+	 * @param	bubblingSignal	another signal for this signal to stop reacting to.
+	 */
 	public function removeBubblingFrom(bubblingSignal:SignalExpress):void {
 		bubblingSignal.remove(this.dispatch);
 	}
