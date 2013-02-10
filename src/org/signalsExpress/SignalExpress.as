@@ -32,8 +32,22 @@ public class SignalExpress {
 				}
 			}
 		}
-		
 		innerParamClasses = paramClasses;
+	}
+	
+	public function set paramClasses(value:Array):void {
+		
+		CONFIG::debug {
+			if (value) {
+				var paramCount:int = value.length;
+				for (var i:int; i < paramCount; i++) {
+					if (!(value[i] is Class)) {
+						throw new ArgumentError("Invalid value item type at index " + i + " should be a Class but was:<" + value[i] + ">." + getQualifiedClassName(value[i]));
+					}
+				}
+			}
+		}
+		innerParamClasses = value;
 	}
 	
 	public function dispatch(... params):void {
@@ -149,6 +163,26 @@ public class SignalExpress {
 			// remove from rogistry.
 			delete handlerRegistry[handler];
 		}
+	}
+	
+	public function removeAll():void {
+		
+		var handlerVo:SignalHandlerVO = head;
+		
+		while (handlerVo) {
+			var nextHandler:SignalHandlerVO = handlerVo.next;
+			
+			delete handlerRegistry[handlerVo.handler];
+			
+			handlerVo.handler = null;
+			handlerVo.next = null;
+			handlerVo.prev = null;
+			
+			handlerVo = nextHandler;
+		}
+		
+		head = null;
+		tail = null;
 	}
 	
 	public function addBubblingFrom(bubblingSignal:SignalExpress):void {

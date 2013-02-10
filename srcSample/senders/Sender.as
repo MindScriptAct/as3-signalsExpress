@@ -14,9 +14,13 @@ import org.signalsExpress.SignalExpress;
 public class Sender extends Sprite {
 	private var label:String;
 	
-	public var clicked:SignalExpress = new SignalExpress(String);
+	public var clicked:SignalExpress;
 	
 	public function Sender(label:String, color:uint = 0xC0C0C0) {
+		
+		clicked = new SignalExpress();
+		clicked.paramClasses = [String];
+		
 		this.label = label;
 		
 		var rectangle:Shape = new Shape();
