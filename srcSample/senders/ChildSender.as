@@ -4,7 +4,7 @@ import flash.display.Sprite;
 import flash.events.MouseEvent;
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
-import org.signalsExpress.SignalExpress;
+import msa.signalsExpress.SignalExpress;
 
 
 /**
@@ -14,7 +14,8 @@ import org.signalsExpress.SignalExpress;
 public class ChildSender extends Sprite {
 	private var label:String;
 	
-	public var clicked:SignalExpress = new SignalExpress(String);
+	public var clicked:SignalExpress
+	= new SignalExpress(String);
 	
 	public function ChildSender(label:String, color:uint = 0xC0C0C0) {
 		this.label = label;

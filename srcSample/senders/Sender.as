@@ -4,8 +4,7 @@ import flash.display.Sprite;
 import flash.events.MouseEvent;
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
-import org.osflash.signals.Signal;
-import org.signalsExpress.SignalExpress;
+import msa.signalsExpress.SignalExpress;
 
 /**
  * COMMENT
@@ -26,7 +25,7 @@ public class Sender extends Sprite {
 		var rectangle:Shape = new Shape();
 		rectangle.graphics.lineStyle(0.1, 0x000000);
 		rectangle.graphics.beginFill(color);
-		rectangle.graphics.drawRect(0, 0, 100, 100);
+		rectangle.graphics.drawRect(0, 0, 230, 100);
 		rectangle.graphics.endFill();
 		this.addChild(rectangle);
 		

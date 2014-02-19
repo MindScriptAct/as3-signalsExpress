@@ -1,8 +1,7 @@
 // Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
-package org.signalsExpress {
+package msa.signalsExpress {
 import flash.utils.Dictionary;
 import flash.utils.getQualifiedClassName;
-import org.signalsExpress.vo.SignalHandlerVO;
 
 /**
  * Alternative to flash events. Re-imagination of as3-Signals (Robert Penner)
@@ -241,4 +240,17 @@ public class SignalExpress {
 	}
 
 }
+}
+
+/**
+ * Value object for handler data.
+ */
+class SignalHandlerVO {
+	
+	public var handler:Function;
+	public var once:Boolean;
+	
+	public var next:SignalHandlerVO;
+	public var prev:SignalHandlerVO;
+
 }

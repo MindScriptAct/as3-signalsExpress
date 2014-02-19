@@ -4,7 +4,7 @@ import flash.display.Sprite;
 import flash.events.MouseEvent;
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
-import org.signalsExpress.SignalExpress;
+import msa.signalsExpress.SignalExpress;
 
 /**
  * COMMENT
