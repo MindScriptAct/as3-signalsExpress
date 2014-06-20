@@ -1,5 +1,5 @@
 // Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
-package msa.signalsExpress {
+package mindscriptact.signalsExpress {
 import flash.utils.Dictionary;
 import flash.utils.getQualifiedClassName;
 
