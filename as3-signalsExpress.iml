@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="Flex" version="4">
-  <component name="FlexBuildConfigurationManager" active="test-runner">
+  <component name="FlexBuildConfigurationManager" active="test-runner-debug">
     <configurations>
-      <configuration name="test-runner" main-class="TestRunner" output-file="as3-signalsExpress.swf" output-folder="$MODULE_DIR$/bin">
+      <configuration name="test-runner-debug" main-class="TestRunner" output-file="as3-signalsExpress.swf" output-folder="$MODULE_DIR$/bin">
         <dependencies target-player="13.0">
           <entries>
             <entry library-id="c35e4e5f-0a67-402f-86b5-c51b643f85d7">
@@ -14,6 +14,24 @@
         <compiler-options>
           <map>
             <entry key="compiler.define" value="CONFIG::debug&#9;true" />
+          </map>
+        </compiler-options>
+        <packaging-air-desktop />
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
+      <configuration name="test-runner-release" main-class="TestRunner" output-file="test-runner-release.swf" output-folder="$MODULE_DIR$/bin">
+        <dependencies target-player="13.0">
+          <entries>
+            <entry library-id="454cdbf5-e825-472b-98ef-5094e4bacb5c">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="flex_sdk_12" />
+        </dependencies>
+        <compiler-options>
+          <map>
+            <entry key="compiler.define" value="CONFIG::debug&#9;false" />
           </map>
         </compiler-options>
         <packaging-air-desktop />
@@ -34,6 +52,17 @@
     <orderEntry type="module-library" exported="">
       <library type="flex">
         <properties id="c35e4e5f-0a67-402f-86b5-c51b643f85d7" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/libs" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/libs" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="454cdbf5-e825-472b-98ef-5094e4bacb5c" />
         <CLASSES>
           <root url="file://$MODULE_DIR$/libs" />
         </CLASSES>
