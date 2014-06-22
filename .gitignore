@@ -11,3 +11,4 @@ bin-release/
 # information for Eclipse / Flash Builder.
 /slowSignals
 /obj
+/.idea/workspace.xml
