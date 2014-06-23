@@ -23,6 +23,7 @@ public class AllTestSuites {
 	public var doubleAddTests:DoubleAddTests;
 
 	public var removeDispatchTests:RemoveDispatchTests;
+	public var paramsCountTests:ParamsCountTests;
 
 
 }

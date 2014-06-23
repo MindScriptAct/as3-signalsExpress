@@ -60,6 +60,13 @@ public class SignalExpress {
 		innerParamClasses = value;
 	}
 
+	/**
+	 * Gives minimum count of parameters that must be provided then dispatching.
+	 */
+	public function get paramCount():uint {
+		return innerParamClasses.length;
+	}
+
 	//----------------------------------
 	//     adding
 	//----------------------------------
