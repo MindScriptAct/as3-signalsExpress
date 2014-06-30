@@ -24,6 +24,8 @@ public class SignalExpress {
 	// last handler in linked list
 	private var tail:SignalHandlerVO;
 
+	private var _handlerCount:int;
+
 	/**
 	 * CONSTRUCTOR
 	 * @param    ... paramClasses    classes that can be optionally provided to ensure that then dispatching parameters with provided types are dispatched. (you can pass more parameters, but not less.)
@@ -67,6 +69,13 @@ public class SignalExpress {
 		return innerParamClasses.length;
 	}
 
+	/**
+	 * Gives count of added signals handlers.
+	 */
+	public function get handlerCount():int {
+		return _handlerCount;
+	}
+
 	//----------------------------------
 	//     adding
 	//----------------------------------
@@ -97,6 +106,8 @@ public class SignalExpress {
 				head = handlerVo;
 				tail = handlerVo;
 			}
+
+			_handlerCount++;
 		}
 	}
 
@@ -126,6 +137,8 @@ public class SignalExpress {
 				tail = handlerVo.prev;
 			}
 
+			_handlerCount--;
+
 			// remove from registry.
 			delete handlerRegistry[handler];
 		}
@@ -152,6 +165,8 @@ public class SignalExpress {
 
 		head = null;
 		tail = null;
+
+		_handlerCount = 0;
 	}
 
 	/**

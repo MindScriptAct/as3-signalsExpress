@@ -1,4 +1,4 @@
-package senders {
+package simleTest.senders {
 import flash.display.Shape;
 import flash.display.Sprite;
 import flash.events.MouseEvent;

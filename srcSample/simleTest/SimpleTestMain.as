@@ -1,16 +1,18 @@
-package {
+package simleTest {
+import simleTest.senders.*;
+
 import flash.display.Sprite;
 import flash.events.Event;
-import senders.ParentSender;
-import senders.Sender;
+import simleTest.senders.ParentSender;
+import simleTest.senders.Sender;
 
 /**
  * ...
  * @author rBanevicius
  */
-public class Main extends Sprite {
+public class SimpleTestMain extends Sprite {
 	
-	public function Main():void {
+	public function SimpleTestMain():void {
 		if (stage)
 			init();
 		else
