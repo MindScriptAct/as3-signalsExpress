@@ -31,20 +31,6 @@ public class SimpleButtonExpress extends SimpleButton {
 	}
 
 	/**
-	 * Adds event handler thought signals.
-	 */
-	override public function addEventListener(type:String, listener:Function, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void {
-		_signals.addEventSignalHandler(type, listener, useCapture, priority, useWeakReference);
-	}
-
-	/**
-	 * Remove event handler thought signals.
-	 */
-	override public function removeEventListener(type:String, listener:Function, useCapture:Boolean = false):void {
-		_signals.removeEventSignalHandler(type, listener, useCapture);
-	}
-
-	/**
 	 * Remove all event listeners.
 	 */
 	public function removeAllEventListeners():void {
