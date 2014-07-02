@@ -41,7 +41,7 @@ public class BitmapExpress extends Bitmap {
 	 * Remove event handler thought signals.
 	 */
 	override public function removeEventListener(type:String, listener:Function, useCapture:Boolean = false):void {
-		_signals.removeEventSignalHandler(type, listener);
+		_signals.removeEventSignalHandler(type, listener, useCapture);
 	}
 
 	/**
