@@ -1,20 +1,21 @@
 package mindscriptact.starlingSignals.display {
 import mindscriptact.starlingSignals.signals.EventDispatcherStarlingSignals;
-import mindscriptact.starlingSignals.signals.display.SpriteStarlingSignals;
+import mindscriptact.starlingSignals.signals.display.ButtonStarlingSignals;
 
 import starling.display.Sprite;
+import starling.textures.Texture;
 
-public class SpriteStarlingExpress extends Sprite {
+public class ButtonStarlingExpress extends starling.display.Button {
 
 	/** @inheritDoc */
-	public function SpriteStarlingExpress() {
-		super();
+	public function ButtonStarlingExpress(upState:Texture, text:String = "", downState:Texture = null, overState:Texture = null, disabledState:Texture = null) {
+		super(upState, text, downState, overState, disabledState);
 	}
 
-	private var _signals:SpriteStarlingSignals;
+	private var _signals:ButtonStarlingSignals;
 
-	public function get signals():SpriteStarlingSignals {
-		return _signals ||= new SpriteStarlingSignals(this);
+	public function get signals():ButtonStarlingSignals {
+		return _signals ||= new ButtonStarlingSignals(this);
 	}
 
 	//-------------------

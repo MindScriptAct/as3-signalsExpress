@@ -1,20 +1,20 @@
 package mindscriptact.starlingSignals.display {
 import mindscriptact.starlingSignals.signals.EventDispatcherStarlingSignals;
-import mindscriptact.starlingSignals.signals.display.SpriteStarlingSignals;
+import mindscriptact.starlingSignals.signals.display.StageStarlingSignals;
 
-import starling.display.Sprite;
+import starling.display.Stage;
 
-public class SpriteStarlingExpress extends Sprite {
+public class StageStarlingExpress extends Stage {
 
 	/** @inheritDoc */
-	public function SpriteStarlingExpress() {
-		super();
+	public function StageStarlingExpress(width:int, height:int, color:uint = 0) {
+		super(width, height, color);
 	}
 
-	private var _signals:SpriteStarlingSignals;
+	private var _signals:StageStarlingSignals;
 
-	public function get signals():SpriteStarlingSignals {
-		return _signals ||= new SpriteStarlingSignals(this);
+	public function get signals():StageStarlingSignals {
+		return _signals ||= new StageStarlingSignals(this);
 	}
 
 	//-------------------

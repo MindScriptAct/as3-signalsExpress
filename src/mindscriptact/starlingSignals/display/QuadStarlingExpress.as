@@ -1,20 +1,23 @@
 package mindscriptact.starlingSignals.display {
 import mindscriptact.starlingSignals.signals.EventDispatcherStarlingSignals;
-import mindscriptact.starlingSignals.signals.display.SpriteStarlingSignals;
+import mindscriptact.starlingSignals.signals.touch.TouchObjectStarlingSignals;
 
-import starling.display.Sprite;
+import starling.display.Image;
+import starling.display.Quad;
+import starling.textures.Texture;
 
-public class SpriteStarlingExpress extends Sprite {
+public class QuadStarlingExpress extends Quad {
 
 	/** @inheritDoc */
-	public function SpriteStarlingExpress() {
-		super();
+	public function QuadStarlingExpress(width:Number, height:Number, color:uint=0xffffff,
+										premultipliedAlpha:Boolean=true) {
+		super(width, height, color, premultipliedAlpha);
 	}
 
-	private var _signals:SpriteStarlingSignals;
+	private var _signals:TouchObjectStarlingSignals;
 
-	public function get signals():SpriteStarlingSignals {
-		return _signals ||= new SpriteStarlingSignals(this);
+	public function get signals():TouchObjectStarlingSignals {
+		return _signals ||= new TouchObjectStarlingSignals(this);
 	}
 
 	//-------------------
