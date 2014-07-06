@@ -5,7 +5,7 @@ import starling.events.TouchEvent;
 
 public class StarlingSampleRoot extends Sprite {
 
-	var view:StarlingExpressObjView;
+	private var view:StarlingExpressObjView;
 
 	public function StarlingSampleRoot() {
 
@@ -22,6 +22,9 @@ public class StarlingSampleRoot extends Sprite {
 		view.signals.mouseOver.add(handleOver);
 		view.signals.mouseOut.add(handleOut);
 
+
+		view.signals.releaseOutside.add(handleReleaseOutside);
+
 		view.signals.mouseUp.add(handleUp);
 		view.signals.mouseDown.add(handleDown);
 
@@ -35,12 +38,12 @@ public class StarlingSampleRoot extends Sprite {
 
 	private function handlerClick(event:TouchEvent):void {
 		trace("Click");
-		view.rotation += Math.PI / 20;
+		view.playClick();
 	}
 
 	private function handleDoubleClick(event:TouchEvent):void {
 		trace("DoubleClick");
-		view.rotation = 0;
+		view.playDoubleClick();
 	}
 
 	private function handleOver(event:TouchEvent):void {
@@ -58,13 +61,19 @@ public class StarlingSampleRoot extends Sprite {
 		view.scaleX = view.scaleY = 1;
 	}
 
+	private function handleReleaseOutside(event:TouchEvent):void {
+		trace("Release outside!");
+		view.scaleX = view.scaleY = 1;
+		view.alpha = 1;
+	}
+
 	private function handleDown(event:TouchEvent):void {
 		trace("Down");
 		view.scaleX = view.scaleY = 1.2;
 	}
 
 	private function handleMove(event:TouchEvent):void {
-		trace("Move");
+		//trace("Move");
 		view.x = 150 - 5 + Math.random() * 10;
 		view.y = 150 - 5 + Math.random() * 10;
 	}

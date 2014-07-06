@@ -10,7 +10,7 @@ package eventTest.starlingView
 	import starling.events.TouchPhase;
 	import starling.textures.Texture;
 
-	public dynamic class TouchSprite extends Sprite
+	public dynamic class TouchSpriteTest extends Sprite
 	{
 
 		private var isDragging : Boolean = false;
@@ -22,7 +22,7 @@ package eventTest.starlingView
 		private static var sHelperTouches : Vector.<Touch> = new <Touch>[];
 		private static var sHelperPoint : Point = new Point();
 
-		public function TouchSprite(_maskVector : Vector.<uint> = null, _maskWidth : Number = 0)
+		public function TouchSpriteTest(_maskVector : Vector.<uint> = null, _maskWidth : Number = 0)
 		{
 
 

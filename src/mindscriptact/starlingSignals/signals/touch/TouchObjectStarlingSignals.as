@@ -1,4 +1,6 @@
 package mindscriptact.starlingSignals.signals.touch {
+import flash.geom.Point;
+import flash.geom.Rectangle;
 import flash.utils.getTimer;
 
 import mindscriptact.signalsExpress.SignalExpress;
@@ -27,6 +29,7 @@ public class TouchObjectStarlingSignals extends DisplayObjectStarlingSignals {
 	private var _mouseUpSignal:SignalExpress;
 	private var _mouseOverSignal:SignalExpress;
 	private var _mouseOutSignal:SignalExpress;
+	private var _releaseOutsideSignal:SignalExpress;
 	private var _mouseMoveSignal:SignalExpress;
 
 	public function TouchObjectStarlingSignals(target:DisplayObject) {
@@ -95,6 +98,14 @@ public class TouchObjectStarlingSignals extends DisplayObjectStarlingSignals {
 		return _mouseOutSignal ||= new SignalExpress();
 	}
 
+	/** signal for TouchEvent.TOUCH, TouchPhase.ENDED, mouse is released OUTSIDE of object bounding box. */
+	public function get releaseOutside():SignalExpress {
+		if (!touchHandlerAdded) {
+			touchHandlerAdded = true;
+			target.addEventListener(TouchEvent.TOUCH, handleTouch);
+		}
+		return _releaseOutsideSignal ||= new SignalExpress();
+	}
 
 	/** signal for TouchEvent.TOUCH, TouchPhase.HOVER and TouchPhase.MOVED */
 	public function get mouseMove():SignalExpress {
@@ -109,31 +120,38 @@ public class TouchObjectStarlingSignals extends DisplayObjectStarlingSignals {
 		var touch:Touch = event.getTouch(displayTarget);
 		//var touches:Vector.<Touch> = event.getTouches(displayTarget);
 		if (touch) {
-			trace("touch!", displayTarget, touch.phase);
-
+			//trace(itemName, touch.phase, "          ", touches);
 			if (touch.phase == TouchPhase.ENDED) {
-				trace("!!!!!!!!!!!!" + touch.target);
-				trace("!!!!!!!!!!!!" + touch.isTouching(displayTarget));
+
+				var releasePoint:Point = touch.getLocation(displayTarget);
+				var targetBounds:Rectangle = displayTarget.getBounds(displayTarget);
+
+				if (targetBounds.contains(releasePoint.x, releasePoint.y)) {
 
 
-				if (_mouseUpSignal) {
-					_mouseUpSignal.dispatch(event);
-				}
-				if (doubleClickEnabled) {
-					var time:int = getTimer();
-					if (time - lastClick < DOUBLE_CLICK_TIME) {
-						if (_doubleClickSignal) {
-							_doubleClickSignal.dispatch(event);
+					if (_mouseUpSignal) {
+						_mouseUpSignal.dispatch(event);
+					}
+					if (doubleClickEnabled) {
+						var time:int = getTimer();
+						if (time - lastClick < DOUBLE_CLICK_TIME) {
+							if (_doubleClickSignal) {
+								_doubleClickSignal.dispatch(event);
+							}
+						} else {
+							if (_clickSignal) {
+								_clickSignal.dispatch(event);
+							}
+							lastClick = time;
 						}
 					} else {
 						if (_clickSignal) {
 							_clickSignal.dispatch(event);
 						}
-						lastClick = time;
 					}
 				} else {
-					if (_clickSignal) {
-						_clickSignal.dispatch(event);
+					if (_releaseOutsideSignal) {
+						_releaseOutsideSignal.dispatch(event);
 					}
 				}
 			} else if (touch.phase == TouchPhase.HOVER) {
