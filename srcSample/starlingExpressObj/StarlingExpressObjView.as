@@ -11,9 +11,12 @@ public class StarlingExpressObjView extends SpriteStarlingExpress {
 
 	public function StarlingExpressObjView() {
 
-		var texture:Texture = Texture.fromColor(100, 100, 0xFFFF0000);
+		var texture:Texture = Texture.fromColor(100, 100, 0xFFFF00FF);
 		testSprite = new Image(texture);
 		this.addChild(testSprite);
+
+		this.pivotX = 50;
+		this.pivotY = 50;
 
 	}
 }

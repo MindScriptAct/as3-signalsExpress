@@ -17,7 +17,7 @@ public class TouchObjectStarlingSignals extends DisplayObjectStarlingSignals {
 	private var touchHandlerAdded:Boolean;
 	private var isMouseOver:Boolean;
 
-	private const DOUBLE_CLICK_TIME:int = 500;
+	private const DOUBLE_CLICK_TIME:int = 300;
 	public var doubleClickEnabled:Boolean;
 	private var lastClick:int;
 
@@ -109,8 +109,13 @@ public class TouchObjectStarlingSignals extends DisplayObjectStarlingSignals {
 		var touch:Touch = event.getTouch(displayTarget);
 		//var touches:Vector.<Touch> = event.getTouches(displayTarget);
 		if (touch) {
-			//trace(itemName, touch.phase, "          ", touches);
+			trace("touch!", displayTarget, touch.phase);
+
 			if (touch.phase == TouchPhase.ENDED) {
+				trace("!!!!!!!!!!!!" + touch.target);
+				trace("!!!!!!!!!!!!" + touch.isTouching(displayTarget));
+
+
 				if (_mouseUpSignal) {
 					_mouseUpSignal.dispatch(event);
 				}
