@@ -1,4 +1,4 @@
-package starlingExpressObj {
+package starlingExpressObj.starling {
 import mindscriptact.starlingSignals.display.SpriteStarlingExpress;
 
 import starling.animation.Transitions;
@@ -50,7 +50,7 @@ public class StarlingExpressObjView extends SpriteStarlingExpress {
 		clickSprite.width = 100;
 		clickSprite.height = 100;
 
-		clickTween = new Tween(clickSprite, 0.5, Transitions.EASE_IN);
+		clickTween = new Tween(clickSprite, 0.5);
 		clickTween.animate("scaleX", 0);
 		clickTween.animate("scaleY", 0);
 		Starling.juggler.add(clickTween);
@@ -60,7 +60,7 @@ public class StarlingExpressObjView extends SpriteStarlingExpress {
 		dobleClickSprite.width = 100;
 		dobleClickSprite.height = 100;
 
-		doubleClickTween = new Tween(dobleClickSprite, 0.5, Transitions.EASE_IN);
+		doubleClickTween = new Tween(dobleClickSprite, 0.5);
 		doubleClickTween.animate("scaleX", 0);
 		doubleClickTween.animate("scaleY", 0);
 		Starling.juggler.add(doubleClickTween);

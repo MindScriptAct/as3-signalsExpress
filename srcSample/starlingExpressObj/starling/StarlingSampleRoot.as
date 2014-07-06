@@ -1,4 +1,4 @@
-package starlingExpressObj {
+package starlingExpressObj.starling {
 import starling.display.Sprite;
 import starling.events.Event;
 import starling.events.TouchEvent;
@@ -14,7 +14,7 @@ public class StarlingSampleRoot extends Sprite {
 		view.x = 150;
 		view.y = 150;
 		view.doubleClickEnabled = true;
-		view.signals.enterFrame.add(handlerEnterFrame);
+		//view.signals.enterFrame.add(handlerEnterFrame);
 
 		view.signals.click.add(handlerClick);
 		view.signals.doubleClick.add(handleDoubleClick);

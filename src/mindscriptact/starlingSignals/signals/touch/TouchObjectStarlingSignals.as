@@ -128,7 +128,6 @@ public class TouchObjectStarlingSignals extends DisplayObjectStarlingSignals {
 
 				if (targetBounds.contains(releasePoint.x, releasePoint.y)) {
 
-
 					if (_mouseUpSignal) {
 						_mouseUpSignal.dispatch(event);
 					}
@@ -169,9 +168,13 @@ public class TouchObjectStarlingSignals extends DisplayObjectStarlingSignals {
 					_mouseDownSignal.dispatch(event);
 				}
 			} else if (touch.phase == TouchPhase.MOVED) {
-				//trace(itemName, "drag???");
+
 				if (_mouseMoveSignal) {
-					_mouseMoveSignal.dispatch(event);
+					releasePoint = touch.getLocation(displayTarget);
+					targetBounds = displayTarget.getBounds(displayTarget);
+					if (targetBounds.contains(releasePoint.x, releasePoint.y)) {
+						_mouseMoveSignal.dispatch(event);
+					}
 				}
 			} else {
 				//trace("Unhandled touch phase : ", touch.phase);
