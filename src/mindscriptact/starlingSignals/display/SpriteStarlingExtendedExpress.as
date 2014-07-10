@@ -27,11 +27,12 @@ public class SpriteStarlingExtendedExpress extends SpriteStarlingExpress {
 
 	override public function hitTest(localPoint:Point, forTouch:Boolean = false):DisplayObject {
 
-		if (isHitExtended) {
-			// when the hit test is done to check if a touch is hitting the object, invisible or
-			// untouchable objects must cause the hit test to fail.
-			if (forTouch && (!visible || !touchable))
+		// on a touch test, invisible or untouchable objects cause the test to fail
+        if (forTouch && (!visible || !touchable)) {
 				return null;
+		}
+		
+		if (isHitExtended) {
 
 			// check hit with rectangle.
 			if (hitRectangle) {
