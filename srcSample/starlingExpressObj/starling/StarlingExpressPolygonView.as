@@ -1,14 +1,15 @@
 package starlingExpressObj.starling {
-import mindscriptact.starlingSignals.display.SpriteStarlingExpress;
+import flash.geom.Point;
 
-import starling.animation.Transitions;
+import mindscriptact.starlingSignals.display.SpriteStarlingExtendedExpress;
+
 import starling.animation.Tween;
 import starling.core.Starling;
 import starling.display.DisplayObject;
 import starling.display.Image;
 import starling.textures.Texture;
 
-public class StarlingExpressObjView extends SpriteStarlingExpress {
+public class StarlingExpressPolygonView extends SpriteStarlingExtendedExpress {
 
 	private var testSprite:DisplayObject;
 	private var clickSprite:Image;
@@ -19,14 +20,35 @@ public class StarlingExpressObjView extends SpriteStarlingExpress {
 	public var baseX:int;
 	public var baseY:int;
 
-	public function StarlingExpressObjView() {
+	// Embed the texture:
+	[Embed(source="/assets/poligonPic.jpg")]
+	public static const TestPic:Class;
 
-		var violetTexture:Texture = Texture.fromColor(100, 100, 0xFFFF00FF);
+	public function StarlingExpressPolygonView() {
+
+		this.pivotX = 60;
+		this.pivotY = 60;
+
+		var violetTexture:Texture = Texture.fromBitmap(new TestPic());
 
 		testSprite = new Image(violetTexture);
-		testSprite.pivotX = 50;
-		testSprite.pivotY = 50;
 		this.addChild(testSprite);
+
+		setHitPolygon(Vector.<Point>([//
+			new Point(57, 30),//
+			new Point(97, 62),//
+			new Point(64, 100),//
+			new Point(57, 70),//
+			new Point(11, 64)//
+		]));
+
+	/*	setHitPolygon(Vector.<Point>([//
+			new Point(0, 0),//
+			new Point(0, 50),//
+			new Point(50, 0)
+		]));*/
+
+		useDebugOverlay = true;
 
 
 		var redTexture:Texture = Texture.fromColor(100, 100, 0xFFFF0000);
@@ -34,8 +56,6 @@ public class StarlingExpressObjView extends SpriteStarlingExpress {
 		dobleClickSprite = new Image(redTexture);
 		dobleClickSprite.width = 0;
 		dobleClickSprite.height = 0;
-		dobleClickSprite.pivotX = 50;
-		dobleClickSprite.pivotY = 50;
 		this.addChild(dobleClickSprite);
 
 		var greenTexture:Texture = Texture.fromColor(100, 100, 0xFF00FF00);
@@ -43,8 +63,6 @@ public class StarlingExpressObjView extends SpriteStarlingExpress {
 		clickSprite = new Image(greenTexture);
 		clickSprite.width = 0;
 		clickSprite.height = 0;
-		clickSprite.pivotX = 50;
-		clickSprite.pivotY = 50;
 		this.addChild(clickSprite);
 
 	}

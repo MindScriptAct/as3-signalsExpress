@@ -1,14 +1,15 @@
 package starlingExpressObj.starling {
-import mindscriptact.starlingSignals.display.SpriteStarlingExpress;
+import flash.geom.Rectangle;
 
-import starling.animation.Transitions;
+import mindscriptact.starlingSignals.display.SpriteStarlingExtendedExpress;
+
 import starling.animation.Tween;
 import starling.core.Starling;
 import starling.display.DisplayObject;
 import starling.display.Image;
 import starling.textures.Texture;
 
-public class StarlingExpressObjView extends SpriteStarlingExpress {
+public class StarlingExpressRectangleView extends SpriteStarlingExtendedExpress {
 
 	private var testSprite:DisplayObject;
 	private var clickSprite:Image;
@@ -19,23 +20,31 @@ public class StarlingExpressObjView extends SpriteStarlingExpress {
 	public var baseX:int;
 	public var baseY:int;
 
-	public function StarlingExpressObjView() {
+	// Embed the texture:
+	[Embed(source="/assets/rectanglePic.jpg")]
+	public static const TestPic:Class;
 
-		var violetTexture:Texture = Texture.fromColor(100, 100, 0xFFFF00FF);
+	public function StarlingExpressRectangleView() {
+
+		var violetTexture:Texture = Texture.fromBitmap(new TestPic());
+
+		this.pivotX = 60;
+		this.pivotY = 60;
 
 		testSprite = new Image(violetTexture);
-		testSprite.pivotX = 50;
-		testSprite.pivotY = 50;
 		this.addChild(testSprite);
 
+		//setHitRectangle(-60 + 20, -60 + 42, 99 - 20, 82 - 42);
+		//setHitEllipse(new Rectangle(20, 42, 99 - 20, 82 - 42));
+		setHitRectangle(new Rectangle(20, 42, 99 - 20, 82 - 42));
+
+		useDebugOverlay = true;
 
 		var redTexture:Texture = Texture.fromColor(100, 100, 0xFFFF0000);
 
 		dobleClickSprite = new Image(redTexture);
 		dobleClickSprite.width = 0;
 		dobleClickSprite.height = 0;
-		dobleClickSprite.pivotX = 50;
-		dobleClickSprite.pivotY = 50;
 		this.addChild(dobleClickSprite);
 
 		var greenTexture:Texture = Texture.fromColor(100, 100, 0xFF00FF00);
@@ -43,8 +52,6 @@ public class StarlingExpressObjView extends SpriteStarlingExpress {
 		clickSprite = new Image(greenTexture);
 		clickSprite.width = 0;
 		clickSprite.height = 0;
-		clickSprite.pivotX = 50;
-		clickSprite.pivotY = 50;
 		this.addChild(clickSprite);
 
 	}
