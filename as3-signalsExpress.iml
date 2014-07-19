@@ -47,7 +47,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/srcPerformanceTest" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/libSrc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/srcSample" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="flex_sdk_12" jdkType="Flex SDK Type (new)" />
