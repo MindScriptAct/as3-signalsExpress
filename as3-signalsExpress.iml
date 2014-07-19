@@ -2,8 +2,8 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="test-runner-debug">
     <configurations>
-      <configuration name="test-runner-debug" main-class="TestRunner" output-file="as3-signalsExpress.swf" output-folder="$MODULE_DIR$/bin">
-        <dependencies target-player="13.0" component-set="MxOnly">
+      <configuration name="test-runner-debug" pure-as="true" main-class="TestRunner" output-file="as3-signalsExpress.swf" output-folder="$MODULE_DIR$/bin">
+        <dependencies target-player="13.0">
           <entries>
             <entry library-id="c35e4e5f-0a67-402f-86b5-c51b643f85d7">
               <dependency linkage="Merged" />
@@ -15,13 +15,14 @@
           <map>
             <entry key="compiler.define" value="CONFIG::debug&#9;true" />
           </map>
+          <option name="additionalOptions" value="-inline" />
         </compiler-options>
         <packaging-air-desktop />
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="test-runner-release" main-class="TestRunner" output-file="test-runner-release.swf" output-folder="$MODULE_DIR$/bin">
-        <dependencies target-player="11.9" component-set="MxOnly">
+      <configuration name="test-runner-release" pure-as="true" main-class="TestRunner" output-file="test-runner-release.swf" output-folder="$MODULE_DIR$/bin">
+        <dependencies target-player="13.0">
           <entries>
             <entry library-id="454cdbf5-e825-472b-98ef-5094e4bacb5c">
               <dependency linkage="Merged" />
@@ -31,8 +32,10 @@
         </dependencies>
         <compiler-options>
           <map>
+            <entry key="compiler.debug.swf" value="false" />
             <entry key="compiler.define" value="CONFIG::debug&#9;false" />
           </map>
+          <option name="additionalOptions" value="-inline" />
         </compiler-options>
         <packaging-air-desktop />
         <packaging-android />
