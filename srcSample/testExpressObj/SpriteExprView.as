@@ -1,6 +1,8 @@
 package testExpressObj {
 import mindscriptact.flashSignals.display.SpriteExpress;
 
+
+[SWF(backgroundColor="0xEEEEEE", width="800", height="600")]
 public class SpriteExprView extends SpriteExpress {
 
 	public function SpriteExprView() {

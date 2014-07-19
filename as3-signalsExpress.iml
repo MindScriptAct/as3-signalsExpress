@@ -2,14 +2,14 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="test-runner-debug">
     <configurations>
-      <configuration name="test-runner-debug" main-class="TestRunner" output-file="as3-signalsExpress.swf" output-folder="$MODULE_DIR$/bin">
-        <dependencies target-player="13.0" component-set="MxOnly">
+      <configuration name="test-runner-debug" pure-as="true" main-class="TestRunner" output-file="test-runner-debug.swf" output-folder="$MODULE_DIR$/bin">
+        <dependencies target-player="14.0">
           <entries>
             <entry library-id="c35e4e5f-0a67-402f-86b5-c51b643f85d7">
               <dependency linkage="Merged" />
             </entry>
           </entries>
-          <sdk name="flex_sdk_12" />
+          <sdk name="AIRSDK_14.0.0.137" />
         </dependencies>
         <compiler-options>
           <map>
@@ -31,6 +31,7 @@
         </dependencies>
         <compiler-options>
           <map>
+            <entry key="compiler.debug.swf" value="false" />
             <entry key="compiler.define" value="CONFIG::debug&#9;false" />
           </map>
         </compiler-options>
@@ -49,7 +50,7 @@
       <sourceFolder url="file://$MODULE_DIR$/srcPerformanceTest" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/srcSample" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="flex_sdk_12" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="jdk" jdkName="AIRSDK_14.0.0.137&#9;flex_sdk_12" jdkType="__CompositeFlexSdk__" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="">
       <library type="flex">
